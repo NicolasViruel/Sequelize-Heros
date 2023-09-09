@@ -65,6 +65,7 @@ router.get("/:code" , async (req, res) =>{
         };
 });
 
+//pasamos por paramos un atributo y por body un valor para actulizar el personaje
 router.put("/:attribute" , async (req, res) =>{
     const { attribute } = req.params;
     const { value } = req.body;
