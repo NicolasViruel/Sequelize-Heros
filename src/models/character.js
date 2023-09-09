@@ -14,6 +14,10 @@ module.exports = (sequelize) =>{
         },
         age: {
             type: DataTypes.INTEGER(),
+            //configuramos "Getters" para definir una edad en el modelo
+            get() {
+                return `${this.getDataValue("age")} years old`
+            },
         },
         race : {
             type: DataTypes.ENUM(['Human', 'Elf' , 'Machine' , 'Demon', 'Animal', 'Other']),
