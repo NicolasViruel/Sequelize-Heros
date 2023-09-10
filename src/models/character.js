@@ -26,7 +26,8 @@ module.exports = (sequelize) =>{
             type: DataTypes.INTEGER(),
             //configuramos "Getters" para definir una edad en el modelo
             get() {
-                return `${this.getDataValue("age")} years old`
+                const age = this.getDataValue("age");
+                return age ? `${age} years old` : age; //si es null devuelve null, si tiene algo devuelve ese texto armado
             },
         },
         race : {

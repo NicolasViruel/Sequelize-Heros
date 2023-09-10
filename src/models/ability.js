@@ -23,7 +23,7 @@ module.exports = (sequelize) =>{
             //queremos que nos muestre solo la parte entera del mana
             type: DataTypes.VIRTUAL,
             get(){
-                return `${this.name}(${Math.floor(this.mana_cost)}) - Description: ${this.description }`
+                return `${this.name}(${Math.floor(this.mana_cost)} poinst of mana) - Description: ${this.description }`
             }
         }
     });

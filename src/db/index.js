@@ -21,11 +21,11 @@ modelRole(db);
 //Desestruturamos los modelos para realizar las RELACIONES
 const {Character , Ability , Role} = db.models;
 
-//un personaje tiene varias habilidades
+//un personaje tiene varias habilidades (uno a muchos)
 Character.hasMany(Ability);
 Ability.belongsTo(Character);
 
-//generamos una tabla intermedia
+//generamos una tabla intermedia (muchos a muchos)
 Character.belongsToMany(Role, { through: "Character_Role"});
 Role.belongsToMany(Character, { through: "Character_Role"});
 
