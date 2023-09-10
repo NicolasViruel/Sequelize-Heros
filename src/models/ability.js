@@ -13,7 +13,11 @@ module.exports = (sequelize) =>{
         mana_cost: {
             type: DataTypes.FLOAT,
             allowNull: false,
-            unique: "name_mc" //de esta forma indicamos que estos dos campos son unicos
+            unique: "name_mc", //de esta forma indicamos que estos dos campos son unicos
+            validate: { //validaciones 
+                min: 10.0,
+                max: 250,
+            }
         },
         summary:{ //creamos un Campo Virtual (donde podemos concatener elementos)
             //queremos que nos muestre solo la parte entera del mana

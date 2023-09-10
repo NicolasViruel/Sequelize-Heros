@@ -6,11 +6,21 @@ module.exports = (sequelize) =>{
             type: DataTypes.STRING(5),
             allowNull: false,
             primaryKey: true,
+            validate: {
+                customValidator(value){
+                    if(value.toLowerCase() ==="henry"){
+                        throw new Error("Error no puede ser HENRY"); //validamos el campo que no pueda ser herry y combinacion de mayusculas y minisculas
+                    };
+                },
+            },
         },
         name: {
             type: DataTypes.STRING(),
             unique: true,
             allowNull: false,
+            validate: {
+                notIn: [[ 'Henry', 'SoyHenry' , 'Soy Henry']], //no pueden ser estos campos
+            },
         },
         age: {
             type: DataTypes.INTEGER(),

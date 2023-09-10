@@ -1,5 +1,6 @@
 const { Router } =require('express');
 const { Character, Op, Role }= require("../db");
+const character = require('../models/character');
 const router = Router();
 
 router.post("/", async (req, res) =>{
@@ -81,6 +82,28 @@ router.put("/:attribute" , async (req, res) =>{
     } catch (error) {
         return res.status(404).send(error.message);
     }
+})
+
+//encontramos el personaje y creamos habilidades
+router.put("/addAbilities", async (req, res) =>{
+    const {abilities , codeCharacter} = req.body;
+    
+    const newAbilities = await Ability.bulkCreate(abilities); 
+    const character = Character.findByPk(codeCharacter);
+
+    character.addAbilities(newAbilities);
+});
+
+//Todos los datos al personaje y informacion detallada relacionada a su Rol
+router.get("/roles/:code", async (req, res) =>{
+    const {code} = req.params;
+
+    const character = await Character.findByPk( code, {
+        include: Role,
+    });
+
+    res.status(200).send(character)
+
 })
 
 module.exports = router;

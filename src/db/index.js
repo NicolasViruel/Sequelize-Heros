@@ -18,6 +18,17 @@ modelCharacter(db);
 modelAbility(db);
 modelRole(db);
 
+//Desestruturamos los modelos para realizar las RELACIONES
+const {Character , Ability , Role} = db.models;
+
+//un personaje tiene varias habilidades
+Character.hasMany(Ability);
+Ability.belongsTo(Character);
+
+//generamos una tabla intermedia
+Character.belongsToMany(Role, { through: "Character_Role"});
+Role.belongsToMany(Character, { through: "Character_Role"});
+
 module.exports = {
     ...db.models,
     db,
